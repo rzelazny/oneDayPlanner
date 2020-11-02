@@ -29,9 +29,24 @@
       <p id="currentDay" class="lead"></p>
     </header>
     <div class="container">
-      <!-- Timeblocks go here -->
+      <!-- Row 1 9am -->
+      <div class="row time-block">
+        <div class="col-lg-2">
+          <h4 class="hour">9am</h4>
+        </div>
+        <div class="col-lg-8">
+          <div class="form-group">
+            <textarea class="form-control description past" id="enterEvent9am" rows="3"></textarea>
+            <!-- <textarea class="form-control time-block" id="enterEvent9am" rows="2"></textarea> -->
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <button type="button" class="btn saveBtn"><i class="fas fa-save"></i></button>
+        </div>
+      </div>
+
     </div>
-    
+
     <script src="assets/javascript/script.js"></script></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
