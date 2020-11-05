@@ -1,7 +1,7 @@
 //array to store and retrieve saved events to local storage
 var events = [];
 
-//Find the timeblock elements for altering background color/displaying stored events
+//Find the timeblock elements for altering background color and displaying stored events
 timeBlocks = $(".description");
 
 //current hour in 24 hour time, our timeblock array starts at 9am, so subtract 9 to sync with the timeBlocks array
@@ -22,7 +22,7 @@ function init() {
         }
     }
 }
-// set current day on jumbotron
+// show current day in header format: month, day, YYYY
 $("#currentDay").text(moment().format('ll'));
 
 //color time blocks
@@ -41,7 +41,7 @@ for (var i = 0;  i < timeBlocks.length; i++){
     }
 }
 
-//When a use clicks a save button store the event in the timeblock to local storage
+//When a user clicks a save button, store the event in the timeblock to local storage
 $(".saveBtn").on("click", function(){
     var newEvent = {
         timeblock: this.attributes.timeindex.value,
@@ -74,7 +74,7 @@ $(".saveBtn").on("click", function(){
     }
 })
 
-//function loops through an object array and returns the index of a given attribute
+//function loops through an object array and returns the index of an attribute with a given value
 function findAttribute(array, attr, value) {
     for(var i = 0; i < array.length; i++) {
         if(array[i][attr] === value) {
