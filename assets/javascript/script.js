@@ -13,21 +13,23 @@ var curTimeBlock = (moment().format('H'));
 curTimeBlock = curTimeBlock - 9;
 
 console.log(timeBlocks[0]);
+console.log(timeBlocks.length);
 
 //color time blocks
 for (var i = 0; i< timeBlocks.length; i++){
 
     if(i === curTimeBlock){
         //current time block is red
-        timeBlocks[i].setAttribute("class", "form-control description present");
+        //timeBlocks[i].setAttribute("class", "form-control description present");
+        $(timeBlocks[i]).attr("class", "form-control description present");
     }
     else if(i < curTimeBlock){
         //past time blocks are grey
-        timeBlocks[i].setAttribute("class", "form-control description past");
+        $(timeBlocks[i]).attr("class", "form-control description past");
     }
     else{
         //future time blocks are green
-        timeBlocks[i].setAttribute("class", "form-control description future");
+        $(timeBlocks[i]).attr("class", "form-control description future");
     }
 }
 
