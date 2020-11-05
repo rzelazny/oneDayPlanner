@@ -59,15 +59,39 @@ $(".saveBtn").on("click", function(){
         timeblock: this.attributes.timeindex.value,
         event: timeBlocks[this.attributes.timeindex.value].value
     }
+    //console.log(events[0].timeblock);
 
+    //see if timeblock already has an event saved
+    
+    var eventExists = findAttribute(events, "timeblock", newEvent.timeblock)
+  
+    if (eventExists === -1){
+        events.push(newEvent);
+    }
+    else{
+        events.splice(eventExists,1,newEvent);
+    }
+
+    //console.log(events.indexOf(0));
     //only want to save the most recent event for a given time
-   //events.splice(0,0,newEvent)
-    events.push(newEvent);
+    
+    //events.push(newEvent);
 
     //console.log(events);
 
     localStorage.setItem("events", JSON.stringify(events));
 })
+
+//function loops through an object array and returns the index of a given attribute
+function findAttribute(array, attr, value) {
+    for(var i = 0; i < array.length; i += 1) {
+        console.log(array[i][attr]);
+        if(array[i][attr] === value) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 //always run initialization code
 init();
