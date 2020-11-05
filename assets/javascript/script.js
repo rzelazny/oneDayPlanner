@@ -1,10 +1,8 @@
-
-// set Day
+// set current day on jumbotron
 $("#currentDay").text(moment().format('ll'));
 
-//get timeblock to set their colors
+//get timeblock elements to set their background color
 timeBlocks = $(".description");
-    //var timeBlocks = document.getElementsByClassName("description");
 
 //current time block in 24 hour time
 var curTimeBlock = (moment().format('H'));
@@ -13,11 +11,10 @@ var curTimeBlock = (moment().format('H'));
 curTimeBlock = curTimeBlock - 9;
 
 //color time blocks
-for (var i = 0; i< timeBlocks.length; i++){
+for (var i = 0;  i< timeBlocks.length; i++){
 
     if(i === curTimeBlock){
         //current time block is red
-        //timeBlocks[i].setAttribute("class", "form-control description present");
         $(timeBlocks[i]).attr("class", "form-control description present");
     }
     else if(i < curTimeBlock){
@@ -52,32 +49,20 @@ function init() {
 
 $(".saveBtn").on("click", function(){
 
-    //console.log($(this));
-   // console.log(timeBlocks[0].value);
-
     var newEvent = {
         timeblock: this.attributes.timeindex.value,
         event: timeBlocks[this.attributes.timeindex.value].value
     }
-    //console.log(events[0].timeblock);
 
     //see if timeblock already has an event saved
-    
     var eventExists = findAttribute(events, "timeblock", newEvent.timeblock)
-  
+
     if (eventExists === -1){
         events.push(newEvent);
     }
     else{
         events.splice(eventExists,1,newEvent);
     }
-
-    //console.log(events.indexOf(0));
-    //only want to save the most recent event for a given time
-    
-    //events.push(newEvent);
-
-    //console.log(events);
 
     localStorage.setItem("events", JSON.stringify(events));
 })
