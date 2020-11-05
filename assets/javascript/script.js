@@ -1,4 +1,4 @@
-//store and retrieve saved events to local storage
+//array to store and retrieve saved events to local storage
 var events = [];
 
 //Find the timeblock elements for altering background color/displaying stored events
@@ -18,9 +18,7 @@ function init() {
 
         //display the stored events
         for (i=0; i < events.length; i++){
-            if(events[i].event !== null){
-                timeBlocks[storedEvents[i].timeblock].innerHTML = storedEvents[i].event;
-            }
+            timeBlocks[storedEvents[i].timeblock].innerHTML = storedEvents[i].event;
         }
     }
 }
@@ -28,7 +26,7 @@ function init() {
 $("#currentDay").text(moment().format('ll'));
 
 //color time blocks
-for (var i = 0;  i< timeBlocks.length; i++){
+for (var i = 0;  i < timeBlocks.length; i++){
     if(i === curTimeBlock){
         //current time block is red
         $(timeBlocks[i]).attr("class", "form-control description present");
@@ -50,28 +48,35 @@ $(".saveBtn").on("click", function(){
         event: timeBlocks[this.attributes.timeindex.value].value
     }
 
-    //no need to store blank events
-    if(newEvent.event !== ""){
-        //see if timeblock already has an event saved
-        var eventExists = findAttribute(events, "timeblock", newEvent.timeblock)
+    //see if timeblock already has an event saved
+    var eventExists = findAttribute(events, "timeblock", newEvent.timeblock)
 
+    //if there is a stored event and the new event is blank, remove the existing event from storage
+    if(eventExists !== -1 && newEvent.event === ""){
+        events.splice(eventExists, 1);
+        localStorage.setItem("events", JSON.stringify(events));
+    }
+    
+    //no need to store blank events unless they're deleting one that already exists
+    if(newEvent.event !== ""){
+        
         if (eventExists === -1){
+            //if there isn't an event for the current timeblock, add it to the end
             events.push(newEvent);
         }
         else{
-            //if there is already an event, overwrite the existing one
-            events.splice(eventExists,1,newEvent);
+            //if there is already an event, overwrite the existing event
+            events.splice(eventExists, 1, newEvent);
         }
 
-        //store the new event
+        //store the updated event array
         localStorage.setItem("events", JSON.stringify(events));
     }
 })
 
 //function loops through an object array and returns the index of a given attribute
 function findAttribute(array, attr, value) {
-    for(var i = 0; i < array.length; i += 1) {
-        console.log(array[i][attr]);
+    for(var i = 0; i < array.length; i++) {
         if(array[i][attr] === value) {
             return i;
         }
