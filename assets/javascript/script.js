@@ -12,9 +12,6 @@ var curTimeBlock = (moment().format('H'));
 //our timeblock array starts at 9am, subtract 9 to sync with the array
 curTimeBlock = curTimeBlock - 9;
 
-console.log(timeBlocks[0]);
-console.log(timeBlocks.length);
-
 //color time blocks
 for (var i = 0; i< timeBlocks.length; i++){
 
@@ -35,7 +32,6 @@ for (var i = 0; i< timeBlocks.length; i++){
 
 //store and retrieve saved events to local storage
 var events = [];
-saveButtons = $(".saveBtn");
 
 function init() {
     // Parsing the JSON string to an object
@@ -64,7 +60,8 @@ $(".saveBtn").on("click", function(){
         event: timeBlocks[this.attributes.timeindex.value].value
     }
 
-    //console.log(newEvent);
+    //only want to save the most recent event for a given time
+   //events.splice(0,0,newEvent)
     events.push(newEvent);
 
     //console.log(events);
