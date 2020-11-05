@@ -23,7 +23,7 @@ function init() {
     }
 }
 // show current day in header format: month, day, YYYY
-$("#currentDay").text(moment().format('ll'));
+$("#currentDay").text(moment().format('LL'));
 
 //color time blocks
 for (var i = 0;  i < timeBlocks.length; i++){
