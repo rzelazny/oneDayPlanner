@@ -22,8 +22,8 @@ function init() {
         }
     }
 }
-// show current day in header format: month, day, YYYY
-$("#currentDay").text(moment().format('LL'));
+// show current day in header format: Day of week, Month, Date
+$("#currentDay").text(moment().format('dddd, MMMM Do'));
 
 //color time blocks
 for (var i = 0;  i < timeBlocks.length; i++){
